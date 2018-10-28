@@ -16,6 +16,11 @@ import numpy as np
 import tf_util
 import gym
 import load_policy
+import mujoco_py
+
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 
 def main():
     import argparse
@@ -68,7 +73,8 @@ def main():
 
         expert_data = {'observations': np.array(observations),
                        'actions': np.array(actions)}
-
+        np.save('observations', observations)
+        np.save('actions', actions)
         with open(os.path.join('expert_data', args.envname + '.pkl'), 'wb') as f:
             pickle.dump(expert_data, f, pickle.HIGHEST_PROTOCOL)
 
